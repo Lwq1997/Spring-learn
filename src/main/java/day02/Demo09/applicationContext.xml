@@ -5,7 +5,7 @@
                         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="baseStudent" class="day02.Demo09.Student">
+    <bean id="baseStudent" class="day02.Demo09.Student" abstract="true">
         <property name="school" value="清华"/>
         <property name="department" value="计算机"/>
     </bean>
