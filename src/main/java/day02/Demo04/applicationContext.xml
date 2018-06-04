@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="some" class="day02.Demo04.Some">
+        <property name="schools">
+            <array>
+                <ref bean="school1"/>
+                <ref bean="school2"/>
+            </array>
+        </property>
+        <property name="myList" value="张3，李4">
+
+        </property>
+        <property name="mySet" value="上海，北京">
+        </property>
+        <property name="myMap">
+            <map>
+                <entry key="QQ" value="465465"/>
+                <entry key="wc" value="465789"/>
+            </map>
+        </property>
+        <property name="myPro">
+            <props>
+                <prop key="地址">西二旗</prop>
+                <prop key="地">西二</prop>
+                <prop key="值">西</prop>
+            </props>
+        </property>
+        <property name="arrs" value="你好,再见">
+
+        </property>
+    </bean>
+
+    <bean id="school1" class="day02.Demo04.School">
+        <property name="name" value="清华大学"/>
+    </bean>
+    <bean id="school2" class="day02.Demo04.School">
+        <property name="name" value="北京大学"/>
+    </bean>
+
+</beans>
