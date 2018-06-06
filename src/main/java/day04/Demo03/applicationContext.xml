@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="someService" class="day04.Demo03.SomeServiceImpl"/>
+    <!--注册通知-->
+    <bean id="afterAdvice" class="day04.Demo03.MyAfterReturningAdvice"/>
+    <!--生成代理对象-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--注册目标对象-->
+        <property name="target" ref="someService"/>
+        <property name="interceptorNames" value="afterAdvice"/>
+    </bean>
+
+
+</beans>
