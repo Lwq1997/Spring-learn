@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <bean id="someService" class="day04.Demo02.SomeServiceImpl"/>
+    <!--注册通知-->
+    <bean id="beforeAdvice" class="day04.Demo02.MyMethodBeforeAdvice"/>
+    <bean id="afterAdvice" class="day04.Demo02.MyAfterReturningAdvice"/>
+    <bean id="methodInterceptor" class="day04.Demo02.MyMethodInterceptor"/>
+    <bean id="throwsAdvice" class="day04.Demo02.MyThrowsAdvice"/>
+    <!--生成代理对象-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--注册目标对象-->
+        <property name="target" ref="someService"/>
+        <!--<property name="targetName" value="someService"/>-->
+        <!--后置-->
+        <!--<property name="interceptorNames" value="afterAdvice"/>-->
+        <!--前置-->
+        <!--<property name="interceptorNames" value="beforeAdvice"/>-->
+        <!--环绕-->
+        <property name="interceptorNames" value="methodInterceptor"/>
+    </bean>
+
+
+</beans>
