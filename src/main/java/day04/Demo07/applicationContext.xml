@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="someService" class="day04.Demo07.SomeServiceImpl"/>
+    <!--注册通知-->
+    <bean id="myAdvice" class="day04.Demo07.MyAfterReturningAdvice"/>
+    <!--注册顾问-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"/>
+        <!--<property name="mappedNames" value="doFirst,doSecond"/>-->
+        <property name="mappedName" value="*ir*"/>
+    </bean>
+
+    <!--生成代理对象-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--注册目标对象-->
+        <property name="target" ref="someService"/>
+        <property name="interceptorNames" value="myAdvisor"/>
+    </bean>
+
+
+</beans>
