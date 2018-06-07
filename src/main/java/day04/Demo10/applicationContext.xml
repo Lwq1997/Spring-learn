@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="someService" class="day04.Demo10.SomeServiceImpl"/>
+    <bean id="someService2" class="day04.Demo10.SomeServiceImpl"/>
+    <!--注册通知-->
+    <bean id="myAdvice" class="day04.Demo09.MyAfterReturningAdvice"/>
+    <!--注册顾问-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"/>
+        <!--<property name="mappedNames" value="doFirst,doSecond"/>-->
+        <!--正则表达式的value匹配的是全限定方法名-->
+        <property name="pattern" value=".*ir.*"/>
+    </bean>
+
+    <!--生成代理对象-->
+    <!--<bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+        <!--&lt;!&ndash;注册目标对象&ndash;&gt;-->
+        <!--<property name="target" ref="someService"/>-->
+        <!--<property name="interceptorNames" value="myAdvisor"/>-->
+    <!--</bean>-->
+
+    <!--自动代理生成器-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
+
+    <!--bean名称自动代理生成器-->
+    <!--可以选择要增强的目标对象-->
+    <!--切面可以是顾问，也可以是通知-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames" value="someService"/>
+        <property name="interceptorNames" value="myAdvisor"/>
+    </bean>
+</beans>
